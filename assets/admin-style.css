@@ -1,0 +1,27 @@
+a.nav-link.active {
+  background-color: #006064 !important;
+}
+
+.nav-link .fa{
+  color: 	#50c7ef !important;
+}
+
+a.x {
+  color: #d84315;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+}
+
+div.sidebar {
+  background-color: #212121 !important;
+  
+}
+
+a.brand-link {
+  background-color: #212121 !important;
+}
+
+ 
+ 
