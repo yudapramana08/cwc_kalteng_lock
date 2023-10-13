@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2023 at 08:15 AM
+-- Generation Time: Oct 13, 2023 at 05:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -32,11 +32,11 @@ CREATE TABLE `db_data` (
   `date` datetime NOT NULL,
   `agent` varchar(200) NOT NULL,
   `call_status` enum('SUCCES','ABANDON') NOT NULL,
-  `caller_number` int(11) NOT NULL,
+  `caller_number` varchar(200) NOT NULL,
   `caller_type` varchar(11) NOT NULL,
   `caller_name` varchar(200) NOT NULL,
-  `account_no` int(11) NOT NULL,
-  `card_no` int(11) NOT NULL,
+  `account_no` varchar(200) NOT NULL,
+  `card_no` varchar(200) NOT NULL,
   `blank_call` enum('NO','YES') NOT NULL,
   `inquiry` enum('NO','YES') NOT NULL,
   `kategori` varchar(200) NOT NULL,
@@ -53,9 +53,7 @@ CREATE TABLE `db_data` (
 --
 
 INSERT INTO `db_data` (`id`, `date`, `agent`, `call_status`, `caller_number`, `caller_type`, `caller_name`, `account_no`, `card_no`, `blank_call`, `inquiry`, `kategori`, `sub1`, `sub2`, `sub3`, `jenis_komplain`, `perihal_pengaduan`, `feedback`) VALUES
-(10, '2023-09-05 13:15:36', 'yuda', 'SUCCES', 111, 'Customer', 'Yuda', 222, 333, 'NO', 'NO', '3', '13', '', '', 'Non pengaduan->Telepon terputus', '<p>x</p>', '<p>x</p>'),
-(11, '2023-09-04 16:12:15', 'yuda', 'SUCCES', 444, 'Customer', 'x', 222, 333, 'NO', 'NO', '1', '1', '', '', 'Informasi->Lain-lain', '<p>s</p>', '<p>s</p>'),
-(12, '2023-09-05 10:37:38', 'yuda', 'SUCCES', 456, 'Customer', 'udin', 431, 3432, 'NO', 'NO', '2', '17', '25', '13', 'Pengaduan->Layanan \r\n->Mobile Banking \r\n->Ganti Mpin\r\n', '<p>erere</p>', '<p>trtrtr</p>');
+(1, '2023-10-13 10:03:32', 'agent1', 'SUCCES', '2147483647', 'Customer', 'Yuda', '123456789', '987654321', 'NO', 'NO', '2', '17', '22', '1', 'Pengaduan->Layanan \r\n->ATM \r\n->BLOKIR ATM\r\n', '<p>Transaksi Transfer via Betang Mobile,</p><p>rekening terdebet tetapi dana belum masuk ke no tujuan dengan nominal Rp. 600.000,-</p><p>Nama: kani</p><p>No Rek: 1000xxx</p><p>CIF: 000002xxx</p><p>Betang&nbsp;Mobile: 082137372217</p><p>Rek Tujuan: BCA 770xxx An. uji coba</p><p>TTl: dd/mm/yy</p><p>Ibu: ujicoba</p><p>Alamat: Jl. indonesia raya</p><p>Tgl trx: dd/mm/yyyy</p><p>CP/WA: 0821xxxxxx</p>', '<p>sjojsojs</p>');
 
 -- --------------------------------------------------------
 
@@ -93,7 +91,7 @@ CREATE TABLE `db_menu` (
   `submenu` enum('Y','T') NOT NULL,
   `admin_menu` enum('Y','T') NOT NULL,
   `aktif` enum('Y','T') NOT NULL,
-  `akses` enum('1','2') NOT NULL
+  `akses` enum('1','2','3') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -101,12 +99,12 @@ CREATE TABLE `db_menu` (
 --
 
 INSERT INTO `db_menu` (`id`, `urutan`, `main_menu`, `nama_ikon`, `link`, `submenu`, `admin_menu`, `aktif`, `akses`) VALUES
-(1, 1, 'Dasboard', 'fa fa-bar-chart', 'admin', 'T', 'Y', 'Y', '2'),
-(2, 2, 'Data', 'fa fa-file-text-o', 'data', 'T', 'Y', 'Y', '2'),
+(1, 1, 'Dasboard', 'fa fa-bar-chart', 'admin', 'T', 'Y', 'Y', '3'),
+(2, 2, 'Data', 'fa fa-file-text-o', 'data', 'T', 'Y', 'Y', '3'),
 (3, 3, 'Matrix', 'fa fa-list-ul', '', 'Y', 'Y', 'Y', '2'),
-(4, 5, 'Akun', 'fa fa-odnoklassniki', 'akun', 'T', 'Y', 'Y', '2'),
-(5, 6, 'Backup DB', 'fa fa-database', 'backupDb', 'T', 'Y', 'Y', '1'),
-(26, 4, 'Laporan', 'fa fa-file-excel-o', 'laporan', 'T', 'Y', 'Y', '1');
+(4, 5, 'Akun', 'fa fa-odnoklassniki', 'akun', 'T', 'Y', 'Y', '3'),
+(5, 6, 'Backup DB', 'fa fa-database', 'backupDb', 'T', 'Y', 'Y', '2'),
+(26, 4, 'Laporan', 'fa fa-file-excel-o', 'laporan', 'T', 'Y', 'Y', '2');
 
 -- --------------------------------------------------------
 
@@ -267,8 +265,9 @@ CREATE TABLE `db_user` (
 INSERT INTO `db_user` (`id`, `username`, `file`, `password`, `akses`) VALUES
 (1, 'Superadmin', 'admin.png', '$2y$10$wKDUNG9ztubO0OQf342aGOp14jCyhEF1Fb9As/QeRg9frVbXOPb7O', 1),
 (204, 'yuda', 'admin.png', '$2y$10$TWbyAv0KtZgbm51efzHDNuHwGMcFgwXTfeDsyhXfLUsBt.BJIywiC', 1),
-(206, 'agent1', 'admin.png', '$2y$10$c3l6RfsNl5quzAoSXfNaBOK07FjC16jDVYaDldZKv..txd1VFelC2', 2),
-(207, 'agent2', 'admin.png', '$2y$10$SB3p6e7VbnkQIxepqY9CR.IJCECyM8gXuuhJjMAoLYW75wM./Npqm', 2);
+(206, 'admin', 'admin.png', '$2y$10$k7.z6CrTiM1rXvZh7Dr2vOP0n3WFrJqgx5N4KgqBWYM0ntWuO.Pdm', 2),
+(208, 'agent1', 'admin.png', '$2y$10$RvkwO8sXQh4sn4s.2e1Nl.phMEH4oZdk9iReRkJGbgHYBgNbK8qtG', 3),
+(209, 'agent2', 'admin.png', '$2y$10$hFIdaxjVQiayOhNlgy11Sup5qnUAUF68KIw7/hxJcBojOoi.nC2uy', 3);
 
 --
 -- Indexes for dumped tables
@@ -334,13 +333,13 @@ ALTER TABLE `db_user`
 -- AUTO_INCREMENT for table `db_data`
 --
 ALTER TABLE `db_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `db_kategori`
 --
 ALTER TABLE `db_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `db_menu`
@@ -352,19 +351,19 @@ ALTER TABLE `db_menu`
 -- AUTO_INCREMENT for table `db_sub1`
 --
 ALTER TABLE `db_sub1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `db_sub2`
 --
 ALTER TABLE `db_sub2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `db_sub3`
 --
 ALTER TABLE `db_sub3`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `db_submenu`
@@ -376,7 +375,7 @@ ALTER TABLE `db_submenu`
 -- AUTO_INCREMENT for table `db_user`
 --
 ALTER TABLE `db_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- Constraints for dumped tables
